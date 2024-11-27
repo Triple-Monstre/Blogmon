@@ -1,9 +1,6 @@
-// components/LoginForm.tsx
-import React from "react";
-
-const LoginForm = () => {
-  return (
-    <form className="w-full max-w-md">
+export default function Home() {
+    return (
+        <form className="w-full max-w-md">
       <div className="mb-4">
         <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
           Email Address
@@ -33,7 +30,5 @@ const LoginForm = () => {
         Login
       </button>
     </form>
-  );
-};
-
-export default LoginForm;
+    );
+}
