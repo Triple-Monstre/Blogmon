@@ -73,6 +73,7 @@ async function main() {
         title: "Les 5 meilleurs champions pour grimper en ranked",
         content: "Découvrez les meilleurs champions pour dominer les parties classées en 2024 !",
         authorId: users[0].id,
+        image: "../public/ranked.jpg"
       },
     }),
     prisma.article.create({
@@ -80,6 +81,7 @@ async function main() {
         title: "Les secrets des chemins de jungle",
         content: "Maîtrisez les chemins de jungle pour déstabiliser vos adversaires.",
         authorId: users[5].id,
+        image: "../public/jungle.jpg"
       },
     }),
     prisma.article.create({
@@ -87,6 +89,7 @@ async function main() {
         title: "Pourquoi Draven est le roi des ADC",
         content: "Un aperçu du kit de Draven et comment porter vos parties avec lui.",
         authorId: users[7].id,
+        image: "../public/draven.jpg"
       },
     }),
     prisma.article.create({
@@ -94,6 +97,7 @@ async function main() {
         title: "Le classement des meilleurs champions de support",
         content: "Découvrez quels champions de support dominent le meta.",
         authorId: users[9].id,
+        image: "../public.bestsupport.webp"
       },
     }),
     prisma.article.create({
@@ -101,6 +105,7 @@ async function main() {
         title: "Le guide pour dominer la lane du top",
         content: "Comment dominer la lane du top et porter votre équipe.",
         authorId: users[6].id,
+        image: "../public/toplane.jpg"
       },
     }),
     prisma.article.create({
@@ -108,6 +113,7 @@ async function main() {
         title: "Les astuces pour les joueurs de Zed en mid-lane",
         content: "Les techniques essentielles pour maîtriser Zed en mid-lane.",
         authorId: users[12].id,
+        image: "../public/zed.jpg"
       },
     }),
     prisma.article.create({
@@ -115,6 +121,7 @@ async function main() {
         title: "Les meilleures constructions pour Ahri en saison 2024",
         content: "Maximisez le potentiel d'Ahri avec ces options de construction.",
         authorId: users[13].id,
+        image: "../public/ahri.jpg"
       },
     }),
     prisma.article.create({
@@ -122,6 +129,7 @@ async function main() {
         title: "Comment voler les objectifs comme un pro",
         content: "Apprenez l'art de voler Baron et Dragon.",
         authorId: users[11].id,
+        image: "../public/nashor.jpg"
       },
     }),
     prisma.article.create({
@@ -129,6 +137,7 @@ async function main() {
         title: "Teemo : énervant mais efficace",
         content: "Analyse de pourquoi Teemo trouve toujours sa place dans le jeu.",
         authorId: users[10].id,
+        image : "../public/teemo.jpg"
       },
     }),
     prisma.article.create({
@@ -136,6 +145,7 @@ async function main() {
         title: "L'histoire de l'esport dans League of Legends",
         content: "Revivez les moments iconiques de Worlds.",
         authorId: users[18].id,
+        image : "../public/esport.png"
       },
     }),
   ]);
