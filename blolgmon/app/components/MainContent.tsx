@@ -3,7 +3,7 @@ import React from "react";
 const MainContent = () => {
   return (
     <main className="container mx-auto mt-5">
-      <h1 className="text-3xl font-bold text-center mb-5">Category: Business</h1>
+      <h1 className="text-3xl font-bold text-center mb-5">Articles du Blolgmon</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <article className="bg-white shadow-lg rounded p-5">
           <img src="img/news-700x435-1.jpg" alt="News" className="w-full h-64 object-cover rounded mb-3" />

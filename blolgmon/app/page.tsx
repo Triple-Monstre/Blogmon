@@ -1,19 +1,8 @@
-import Footer from './components/Footer';
-import Navbar from './components/Navbar';
-import MainContent from './components/MainContent';
-import TopBar from './components/TopBar';
 
-
-export default function Home() {
+export default function HelloPage() {
     return (
-        <div>
-            <TopBar/>
-            <Navbar />
-            <main>
-                <h1>Bienvenue sur le projet fusionné</h1>
-            </main>
-            <MainContent />
-            <Footer />
-        </div>
+      <div className="flex items-center justify-center h-screen bg-gray-100">
+        <h1 className="text-4xl font-bold text-blue-500">Hello World!</h1>
+      </div>
     );
-}
+  }
