@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import Image from "next/image";
+import Link from "next/link"; // Import du composant Link
 
 interface Article {
   id: number;
@@ -7,9 +8,9 @@ interface Article {
 }
 
 async function fetchLatestArticles(): Promise<Article[]> {
-  const response = await fetch('http://localhost:3000/api/articles', { cache: 'no-store' });
+  const response = await fetch("http://localhost:3000/api/articles", { cache: "no-store" });
   if (!response.ok) {
-    throw new Error('Erreur lors de la récupération des articles');
+    throw new Error("Erreur lors de la récupération des articles");
   }
   return response.json();
 }
@@ -34,7 +35,7 @@ export default async function MainContent() {
               />
             </div>
             <h2 className="text-lg font-semibold mt-2">{article.title}</h2>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
