@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import Image from "next/image";
+import Link from "next/link"; // Import du composant Link
 
 interface Article {
   id: number;
@@ -7,9 +8,9 @@ interface Article {
 }
 
 async function fetchLatestArticles(): Promise<Article[]> {
-  const response = await fetch('http://localhost:3000/api/articles', { cache: 'no-store' });
+  const response = await fetch("http://localhost:3000/api/articles", { cache: "no-store" });
   if (!response.ok) {
-    throw new Error('Erreur lors de la récupération des articles');
+    throw new Error("Erreur lors de la récupération des articles");
   }
   return response.json();
 }
@@ -22,7 +23,12 @@ export default async function MainContent() {
       <h1 className="text-2xl font-bold mb-4">Les derniers articles</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {articles.map((article) => (
-          <div key={article.id} className="bg-white rounded-lg shadow-md p-4">
+          <Link
+            key={article.id}
+            href={`/article?id=${article.id}`} // Crée un lien vers la page Article avec l'ID
+            className="bg-white rounded-lg shadow-md p-4 block"
+          >
+            {/* Image et titre dans le lien */}
             <Image
               src={article.image}
               alt={article.title}
@@ -31,7 +37,7 @@ export default async function MainContent() {
               height={200}
             />
             <h2 className="text-lg font-semibold mt-2">{article.title}</h2>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
