@@ -8,7 +8,6 @@ const Navbar = () => {
         <ul className="hidden lg:flex space-x-5">
           <li><a href="/home" className="hover:text-blue-400">Home</a></li>
           <li><a href="/categorie" className="hover:text-red-400">Category</a></li>
-          <li><a href="/single" className="hover:text-red-400">Single News</a></li>
           <li><a href="/contact" className="hover:text-red-400">Contact</a></li>
         </ul>
         <button className="lg:hidden bg-red-500 px-3 py-2 rounded">Menu</button>
