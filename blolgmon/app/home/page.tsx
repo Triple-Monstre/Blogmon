@@ -23,13 +23,16 @@ export default async function MainContent() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {articles.map((article) => (
           <div key={article.id} className="bg-white rounded-lg shadow-md p-4">
-            <Image
-              src={article.image}
-              alt={article.title}
-              className="rounded-md"
-              width={300}
-              height={200}
-            />
+            {/* Conteneur pour uniformiser la taille */}
+            <div className="w-full h-48 md:h-64 overflow-hidden rounded-md">
+              <Image
+                src={article.image}
+                alt={article.title}
+                className="object-cover w-full h-full"
+                width={600} // Largeur adaptée
+                height={400} // Hauteur adaptée
+              />
+            </div>
             <h2 className="text-lg font-semibold mt-2">{article.title}</h2>
           </div>
         ))}
