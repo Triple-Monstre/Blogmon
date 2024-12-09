@@ -1,20 +1,39 @@
+import Image from 'next/image';
 
-export default function HelloPage() {
-    return (
-        <main className="container mx-auto mt-5">
-        <h1 className="text-3xl font-bold text-center mb-5">Articles du Blolgmon</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <article className="bg-white shadow-lg rounded p-5">
-            <img src="img/news-700x435-1.jpg" alt="News" className="w-full h-64 object-cover rounded mb-3" />
-            <h2 className="text-xl font-bold mb-2">Lorem ipsum dolor sit amet elit...</h2>
-            <p className="text-gray-600">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna...</p>
-          </article>
-          <article className="bg-white shadow-lg rounded p-5">
-            <img src="img/news-700x435-2.jpg" alt="News" className="w-full h-64 object-cover rounded mb-3" />
-            <h2 className="text-xl font-bold mb-2">Dolor lorem eos dolor duo...</h2>
-            <p className="text-gray-600">Dolor sit magna rebum clita rebum dolor stet amet justo...</p>
-          </article>
-        </div>
-      </main>
-    );
+interface Article {
+  id: number;
+  title: string;
+  image: string;
+}
+
+async function fetchLatestArticles(): Promise<Article[]> {
+  const response = await fetch('http://localhost:3000/api/articles', { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error('Erreur lors de la récupération des articles');
   }
+  return response.json();
+}
+
+export default async function MainContent() {
+  const articles = await fetchLatestArticles();
+
+  return (
+    <section className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Les derniers articles</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {articles.map((article) => (
+          <div key={article.id} className="bg-white rounded-lg shadow-md p-4">
+            <Image
+              src={article.image}
+              alt={article.title}
+              className="rounded-md"
+              width={300}
+              height={200}
+            />
+            <h2 className="text-lg font-semibold mt-2">{article.title}</h2>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}

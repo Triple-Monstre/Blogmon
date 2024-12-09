@@ -7,10 +7,14 @@ const prisma = new PrismaClient();
 export async function GET() {
   try {
     const articles = await prisma.article.findMany({
+      take: 2, // Récupère les 2 derniers articles
+      orderBy: {
+        createdAt: 'desc', // Trie par date de création (descendant)
+      },
       select: {
         id: true,
         title: true,
-        image: true, // Sélection de l'image
+        image: true,
       },
     });
     return NextResponse.json(articles);
