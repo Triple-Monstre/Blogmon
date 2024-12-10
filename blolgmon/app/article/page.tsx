@@ -57,7 +57,7 @@ export default function ArticlePage() {
     <div className="bg-gray-700 min-h-screen py-10">
   <div className="container mx-auto px-4 rounded-2xl">
     <div className="max-w-3xl mx-auto bg-purple-600 shadow-lg rounded-2xl overflow-hidden">
-      {/* Image */}
+      
       <div className="w-full h-auto">
         <Image
           src={article.image || "/placeholder.jpg"}
@@ -68,7 +68,7 @@ export default function ArticlePage() {
         />
       </div>
 
-      {/* Contenu */}
+      
       <div className="p-6">
         <h1 className="text-3xl bg-gray-800 font-bold rounded-xl py-4 px-auto text-gray-300 mt-4 mb-6 text-center">
           {article.title}
