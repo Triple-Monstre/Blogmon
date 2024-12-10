@@ -68,7 +68,7 @@ export default function ArticlesPage() {
                   alt={article.title}
                   className="object-cover w-full h-full"
                   width={600} // Largeur recommandée
-                  height={500} // Hauteur recommandée
+                  height={600} // Hauteur recommandée
                 />
               </div>
               {/* Titre de l'article */}
@@ -101,7 +101,7 @@ export default function ArticlesPage() {
                   alt={article.title}
                   className="object-cover w-full h-full"
                   width={600} // Largeur recommandée
-                  height={500} // Hauteur recommandée
+                  height={600} // Hauteur recommandée
                 />
               </div>
               {/* Titre de l'article */}

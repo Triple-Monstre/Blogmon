@@ -5,6 +5,32 @@ const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
   try {
+    // Extraire l'ID de l'article depuis l'URL
+    const url = new URL(req.url);
+    const articleId = url.searchParams.get('id'); // Exemple : /api/articles?id=123
+
+    if (articleId) {
+      // Récupérer un article spécifique par ID
+      const article = await prisma.article.findUnique({
+        where: { id: articleId },
+        include: {
+          author: { select: { name: true } }, // Inclure les informations de l'auteur
+        },
+      });
+
+      if (!article) {
+        return NextResponse.json(
+          { error: 'Article non trouvé.' },
+          { status: 404 }
+        );
+      }
+
+      // Réponse pour un article spécifique
+      return NextResponse.json(article);
+    }
+
+    // Pas d'ID : continuer avec la logique existante pour les derniers articles et utilisateur aléatoire
+
     // Récupérer les deux derniers articles
     const latestArticles = await prisma.article.findMany({
       orderBy: { createdAt: 'desc' },
@@ -13,7 +39,10 @@ export async function GET(req: NextRequest) {
 
     // Vérifier qu'il y a des articles dans la base
     if (latestArticles.length === 0) {
-      return NextResponse.json({ error: 'Aucun article trouvé.' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Aucun article trouvé.' },
+        { status: 404 }
+      );
     }
 
     // Récupérer les utilisateurs ayant au moins un article
@@ -26,9 +55,11 @@ export async function GET(req: NextRequest) {
       select: { id: true }, // On ne récupère que les IDs pour optimiser la requête
     });
 
-    // Vérifier qu'il existe des utilisateurs ayant des articles
     if (usersWithArticles.length === 0) {
-      return NextResponse.json({ error: 'Aucun utilisateur avec des articles trouvé.' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Aucun utilisateur avec des articles trouvé.' },
+        { status: 404 }
+      );
     }
 
     // Choisir un utilisateur au hasard parmi ceux ayant des articles
@@ -45,13 +76,16 @@ export async function GET(req: NextRequest) {
       orderBy: {
         id: 'asc',
       },
-      skip: Math.floor(Math.random() * (await prisma.user.count({
-        where: {
-          articles: {
-            some: {}, // Uniquement les utilisateurs ayant des articles
-          },
-        },
-      }))),
+      skip: Math.floor(
+        Math.random() *
+          (await prisma.user.count({
+            where: {
+              articles: {
+                some: {}, // Uniquement les utilisateurs ayant des articles
+              },
+            },
+          }))
+      ),
     });
 
     if (!randomUser) {
@@ -68,9 +102,11 @@ export async function GET(req: NextRequest) {
       take: 2,
     });
 
-    // Vérifier qu'il y a bien des articles associés à l'utilisateur
     if (randomArticles.length === 0) {
-      return NextResponse.json({ error: 'Aucun article trouvé pour cet utilisateur.' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Aucun article trouvé pour cet utilisateur.' },
+        { status: 404 }
+      );
     }
 
     // Réponse finale
@@ -83,7 +119,10 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error('Erreur API :', error);
-    return NextResponse.json({ error: 'Erreur interne du serveur.' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Erreur interne du serveur.' },
+      { status: 500 }
+    );
   } finally {
     await prisma.$disconnect();
   }
