@@ -48,7 +48,7 @@ export default function ArticlesPage() {
   }
 
   return (
-    <section className="p-4">
+    <section className="p-4 bg-gray-700">
       {/* Section 1 : Les derniers articles */}
       <h1 className="text-2xl font-bold mb-4 bg-purple-600 text-white rounded-2xl py-3 px-6 text-center mx-auto w-fill">
         Les derniers articles
@@ -59,20 +59,20 @@ export default function ArticlesPage() {
             <Link
               key={article.id}
               href={`/article?id=${article.id}`} // Lien vers la page Article
-              className="bg-white rounded-lg shadow-md p-4 block hover:shadow-lg transition-shadow duration-300"
+              className="bg-gray-800 rounded-2xl shadow-md p-4 block hover:shadow-lg transition-shadow duration-300"
             >
               {/* Image dans un conteneur pour garder une taille uniforme */}
-              <div className="w-full h-48 md:h-64 overflow-hidden rounded-md">
+              <div className="w-full h-auto overflow-hidden rounded-xl">
                 <Image
                   src={article.image || "/placeholder.jpg"} // Image par défaut si absente
                   alt={article.title}
-                  className="object-cover w-full h-full"
-                  width={600} // Largeur recommandée
-                  height={600} // Hauteur recommandée
+                  className="object-cover w-full h-auto "
+                  width={400} // Largeur recommandée
+                  height={400} // Hauteur recommandée
                 />
               </div>
               {/* Titre de l'article */}
-              <h2 className="text-lg font-semibold mt-2">{article.title}</h2>
+              <h2 className="text-white text-lg font-semibold mt-2 ">{article.title}</h2>
             </Link>
           ))
         ) : (
@@ -81,7 +81,7 @@ export default function ArticlesPage() {
       </div>
 
       {/* Section 2 : Quelques articles d'un utilisateur aléatoire */}
-      <h1 className="text-2xl font-bold mb-4 bg-purple-600 text-white rounded-2xl py-3 px-6 text-center mx-auto w-fill">
+      <h1 className="text-2xl font-bold mb-4 bg-purple-600 text-white rounded-2xl py-3 px-6 text-center mt-4 mx-auto w-fill padding">
         {randomUser
           ? `Quelques articles de ${randomUser.name}`
           : "Quelques articles d'un utilisateur aléatoire"}
@@ -92,20 +92,20 @@ export default function ArticlesPage() {
             <Link
               key={article.id}
               href={`/article?id=${article.id}`} // Lien vers la page Article
-              className="bg-white rounded-lg shadow-md p-4 block hover:shadow-lg transition-shadow duration-300"
+              className="bg-gray-800 rounded-2xl shadow-md p-4 block hover:shadow-lg transition-shadow duration-300"
             >
               {/* Image dans un conteneur pour garder une taille uniforme */}
-              <div className="w-full h-48 md:h-64 overflow-hidden rounded-md">
+              <div className="w-full h-auto overflow-hidden rounded-xl">
                 <Image
                   src={article.image || "/placeholder.jpg"} // Image par défaut si absente
                   alt={article.title}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-auto"
                   width={600} // Largeur recommandée
-                  height={600} // Hauteur recommandée
+                  height={200} // Hauteur recommandée
                 />
               </div>
               {/* Titre de l'article */}
-              <h2 className="text-lg font-semibold mt-2">{article.title}</h2>
+              <h2 className="text-white text-lg font-semibold mt-2">{article.title}</h2>
             </Link>
           ))
         ) : (

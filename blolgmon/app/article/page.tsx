@@ -54,39 +54,42 @@ export default function ArticlePage() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-          <div className="w-full h-64">
-            <Image
-              src={article.image || "/placeholder.jpg"}
-              alt={article.title}
-              className="object-cover w-full h-full"
-              width={600}
-              height={400}
-            />
-          </div>
+    <div className="bg-gray-700 min-h-screen py-10">
+  <div className="container mx-auto px-4 rounded-2xl">
+    <div className="max-w-3xl mx-auto bg-purple-600 shadow-lg rounded-2xl overflow-hidden">
+      {/* Image */}
+      <div className="w-full h-auto">
+        <Image
+          src={article.image || "/placeholder.jpg"}
+          alt={article.title}
+          className="object-cover w-full rounded-t-2xl"
+          width={600}
+          height={400}
+        />
+      </div>
 
-          <div className="p-6">
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">
-              {article.title}
-            </h1>
+      {/* Contenu */}
+      <div className="p-6">
+        <h1 className="text-3xl bg-gray-800 font-bold rounded-xl py-4 px-auto text-gray-300 mt-4 mb-6 text-center">
+          {article.title}
+        </h1>
 
-            <p className="text-gray-700 leading-relaxed mb-6">
-              {article.content}
-            </p>
+        <p className="text-gray-200 leading-relaxed mb-6">
+          {article.content}
+        </p>
 
-            <div className="border-t pt-4">
-              <p className="text-gray-600 text-sm">
-                Écrit par :{" "}
-                <span className="font-semibold text-gray-800">
-                  {article.author.name}
-                </span>
-              </p>
-            </div>
-          </div>
+        <div className="border-t pt-4">
+          <p className="text-gray-200 text-sm">
+            Écrit par :{" "}
+            <span className="font-semibold text-gray-800">
+              {article.author.name}
+            </span>
+          </p>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   );
 }

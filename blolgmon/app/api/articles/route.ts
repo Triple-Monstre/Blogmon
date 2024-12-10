@@ -1,46 +1,60 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
   try {
-    // Extraire l'ID de l'article depuis l'URL
     const url = new URL(req.url);
-    const articleId = url.searchParams.get('id'); // Exemple : /api/articles?id=123
+    const articleId = url.searchParams.get("id"); // Ex: /api/articles?id=123
+    const allArticles = url.searchParams.get("all"); // Ex: /api/articles?all=true
 
     if (articleId) {
       // Récupérer un article spécifique par ID
       const article = await prisma.article.findUnique({
         where: { id: articleId },
         include: {
-          author: { select: { name: true } }, // Inclure les informations de l'auteur
+          author: { select: { name: true } }, // Inclure l'auteur de l'article
         },
       });
 
       if (!article) {
         return NextResponse.json(
-          { error: 'Article non trouvé.' },
+          { error: "Article non trouvé." },
           { status: 404 }
         );
       }
 
-      // Réponse pour un article spécifique
       return NextResponse.json(article);
     }
 
-    // Pas d'ID : continuer avec la logique existante pour les derniers articles et utilisateur aléatoire
+    if (allArticles) {
+      // Récupérer tous les articles pour la recherche
+      const articles = await prisma.article.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+
+      if (articles.length === 0) {
+        return NextResponse.json(
+          { error: "Aucun article trouvé." },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json({ allArticles: articles });
+    }
+
+    // Continuer avec la logique existante pour les derniers articles et utilisateur aléatoire
 
     // Récupérer les deux derniers articles
     const latestArticles = await prisma.article.findMany({
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
       take: 2,
     });
 
-    // Vérifier qu'il y a des articles dans la base
     if (latestArticles.length === 0) {
       return NextResponse.json(
-        { error: 'Aucun article trouvé.' },
+        { error: "Aucun article trouvé." },
         { status: 404 }
       );
     }
@@ -52,17 +66,17 @@ export async function GET(req: NextRequest) {
           some: {}, // Filtre pour trouver les utilisateurs ayant au moins un article
         },
       },
-      select: { id: true }, // On ne récupère que les IDs pour optimiser la requête
+      select: { id: true }, // Optimiser la requête en ne récupérant que les IDs
     });
 
     if (usersWithArticles.length === 0) {
       return NextResponse.json(
-        { error: 'Aucun utilisateur avec des articles trouvé.' },
+        { error: "Aucun utilisateur avec des articles trouvé." },
         { status: 404 }
       );
     }
 
-    // Choisir un utilisateur au hasard parmi ceux ayant des articles
+    // Choisir un utilisateur aléatoire parmi ceux ayant des articles
     const randomUser = await prisma.user.findFirst({
       select: {
         id: true,
@@ -74,14 +88,14 @@ export async function GET(req: NextRequest) {
         },
       },
       orderBy: {
-        id: 'asc',
+        id: "asc",
       },
       skip: Math.floor(
         Math.random() *
           (await prisma.user.count({
             where: {
               articles: {
-                some: {}, // Uniquement les utilisateurs ayant des articles
+                some: {}, // Filtre pour les utilisateurs ayant des articles
               },
             },
           }))
@@ -90,7 +104,7 @@ export async function GET(req: NextRequest) {
 
     if (!randomUser) {
       return NextResponse.json(
-        { error: 'Aucun utilisateur avec des articles trouvé.' },
+        { error: "Aucun utilisateur avec des articles trouvé." },
         { status: 404 }
       );
     }
@@ -98,13 +112,13 @@ export async function GET(req: NextRequest) {
     // Récupérer deux articles aléatoires pour cet utilisateur
     const randomArticles = await prisma.article.findMany({
       where: { authorId: randomUser.id },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
       take: 2,
     });
 
     if (randomArticles.length === 0) {
       return NextResponse.json(
-        { error: 'Aucun article trouvé pour cet utilisateur.' },
+        { error: "Aucun article trouvé pour cet utilisateur." },
         { status: 404 }
       );
     }
@@ -114,13 +128,13 @@ export async function GET(req: NextRequest) {
       latestArticles,
       randomArticles,
       randomUser: {
-        name: randomUser.name, // Assurez-vous que le champ existe dans votre modèle
+        name: randomUser.name,
       },
     });
   } catch (error) {
-    console.error('Erreur API :', error);
+    console.error("Erreur API :", error);
     return NextResponse.json(
-      { error: 'Erreur interne du serveur.' },
+      { error: "Erreur interne du serveur." },
       { status: 500 }
     );
   } finally {
