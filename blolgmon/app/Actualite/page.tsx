@@ -37,14 +37,13 @@ export default function Home() {
   
             <div className="bg-white shadow-lg rounded-lg p-6">
               <img
-                src="https://via.placeholder.com/300"
-                alt="Placeholder"
+                src="/img/hq720.jpg"
+                alt="Buff Mundo"
                 className="w-full h-48 object-cover rounded-md mb-4"
               />
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">Contact 3</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Actualité 3</h2>
               <p className="text-gray-600">
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam
-                corporis suscipit laboriosam.
+              Dr. Mundo a été un nerf mineur concernant ses dégâts supplémentaires avec l'attaque de son sort E - Blunt Force Trauma. Désormais, les dégâts bonus passent de 2/2.35/2.7/3.05/3.4% de sa vie maximale à 2/2.25/2.5/2.75/3% de sa vie maximale. Ces changements visent à réduire ses dégâts tout en maintenant sa durabilité et sa capacité à encaisser en tant que tank, notamment avec les récents buffs des objets pour tanks qui augmentaient son efficacité
               </p>
             </div>
           </div>
