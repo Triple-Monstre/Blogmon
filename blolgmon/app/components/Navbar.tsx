@@ -7,8 +7,8 @@ const Navbar = () => {
         <a href="/home" className="text-2xl font-bold text-blue-500">BizNews</a>
         <ul className="hidden lg:flex space-x-5">
           <li><a href="/home" className="hover:text-blue-400">Home</a></li>
-          <li><a href="/categorie" className="hover:text-red-400">Category</a></li>
-          <li><a href="/contact" className="hover:text-red-400">Contact</a></li>
+          <li><a href="/Recherche" className="hover:text-red-400">Recherche</a></li>
+          <li><a href="/Actualite" className="hover:text-red-400">Actualité</a></li>
         </ul>
         <button className="lg:hidden bg-red-500 px-3 py-2 rounded">Menu</button>
       </div>
