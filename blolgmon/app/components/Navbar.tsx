@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-800 text-white px-5 py-3">
       <div className="flex justify-between items-center">
-        <a href="/home" className="text-2xl font-bold text-blue-500">BizNews</a>
+        <a href="/home" className="text-2xl font-bold text-blue-500">Blogmon</a>
         <ul className="hidden lg:flex space-x-5">
           <li><a href="/home" className="hover:text-blue-400">Home</a></li>
           <li><a href="/Recherche" className="hover:text-red-400">Recherche</a></li>
